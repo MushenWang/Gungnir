@@ -1,0 +1,7 @@
+.idea/
+*.iml
+target/
+.project
+.classpath
+bin/
+LICENSE
