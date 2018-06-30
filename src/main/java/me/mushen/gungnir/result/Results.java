@@ -14,9 +14,9 @@ public final class Results {
     private static final int FAIL_CODE = 0;
     // 成功码(1)
     private static final int SUCC_CODE = 1;
-
+    // 错误码: 异常
     private static final int FAIL_EXCEPTION_CODE = 999999999;
-
+    // 错误码: 未知的错误，默认错误码
     private static final int FAIL_DEFAULT_CODE = 999999000;
 
     public static boolean isSucc(Result result) {
