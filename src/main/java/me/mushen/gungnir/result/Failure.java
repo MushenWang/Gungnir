@@ -1,22 +1,26 @@
 package me.mushen.gungnir.result;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
 /**
- * @Desc 错误信息
- * @Author Remilia
+ * @Desc Failure Detail Info.
+ * @Author Mushen
  * @Create 2018-06-30
  */
 @Getter
 @ToString
-@AllArgsConstructor
 public class Failure {
-    // 错误码
+    // Failure Code
     private int failCode;
-    // 错误名称
+    // name
     private String failName;
-    // 错误描述
+    // description
     private String failDesc;
+
+    public Failure(int failCode, String failName, String failDesc) {
+        this.failCode = failCode;
+        this.failName = failName;
+        this.failDesc = failDesc;
+    }
 }

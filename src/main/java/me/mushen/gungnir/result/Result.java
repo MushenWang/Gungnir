@@ -7,15 +7,15 @@ import java.util.List;
 
 /**
  * @Desc
- * @Author Remilia
+ * @Author Mushen
  * @Create 2018-06-30
  */
 @Getter
 @ToString
 public class Result {
-    // 返回结果码: 成功(1), 失败(0)
+    // Result Code: success(1), failure(0)
     private int code;
-    // 具体的错误信息: 如果返回结果为0时, 则该字段不为空
+    // Detail Failure Information
     private List<Failure> failures;
 
     public Result(int code) {

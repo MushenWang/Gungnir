@@ -97,11 +97,6 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <encoding>UTF-8</encoding>
-                    <compilerArgs>
-                        <arg>-extdirs</arg>
-                        <compilerArg>${project.basedir}/src/lib</compilerArg>
-                    </compilerArgs>
                 </configuration>
             </plugin>
             <!-- resources -->
