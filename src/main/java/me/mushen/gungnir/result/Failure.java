@@ -1,6 +1,6 @@
 package me.mushen.gungnir.result;
 
-import lombok.Getter;
+import com.google.common.base.Strings;
 import lombok.ToString;
 
 /**
@@ -8,7 +8,6 @@ import lombok.ToString;
  * @Author Mushen
  * @Create 2018-06-30
  */
-@Getter
 @ToString
 public class Failure {
     // Failure Code
@@ -22,5 +21,17 @@ public class Failure {
         this.failCode = failCode;
         this.failName = failName;
         this.failDesc = failDesc;
+    }
+
+    public int getFailCode() {
+        return failCode;
+    }
+
+    public String getFailName() {
+        return Strings.nullToEmpty(failName).trim();
+    }
+
+    public String getFailDesc() {
+        return Strings.nullToEmpty(failDesc).trim();
     }
 }

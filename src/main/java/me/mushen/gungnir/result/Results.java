@@ -1,6 +1,5 @@
 package me.mushen.gungnir.result;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,7 +43,7 @@ public final class Results {
         if(failures != null && failures.length > 0) {
             return failure(Arrays.asList(failures));
         }else {
-            return failure(new ArrayList<>());
+            return failure();
         }
     }
 
