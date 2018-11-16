@@ -1,20 +1,20 @@
 package me.mushen.gungnir.result;
 
 import com.google.common.base.Strings;
-import lombok.ToString;
 
 /**
- * @Desc Failure Detail Info.
+ * @Desc 错误详情, 包括: 错误码, 错误名称, 错误详情
  * @Author Mushen
  * @Create 2018-06-30
  */
-@ToString
 public class Failure {
-    // Failure Code
+    /** 错误码 */
     private int failCode;
-    // name
+
+    /** 错误名称 */
     private String failName;
-    // description
+
+    /** 错误详情 */
     private String failDesc;
 
     public Failure(int failCode, String failName, String failDesc) {
@@ -33,5 +33,14 @@ public class Failure {
 
     public String getFailDesc() {
         return Strings.nullToEmpty(failDesc).trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Failure{" +
+                "code: " + failCode +
+                ", name: '" + failName + '\'' +
+                ", desc: '" + failDesc + '\'' +
+                '}';
     }
 }

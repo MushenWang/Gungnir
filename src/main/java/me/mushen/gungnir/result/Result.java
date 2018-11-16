@@ -1,29 +1,38 @@
 package me.mushen.gungnir.result;
 
-import lombok.Getter;
-import lombok.ToString;
-
-import java.util.List;
-
 /**
- * @Desc
+ * @Desc 标识成功与失败的Result
  * @Author Mushen
  * @Create 2018-06-30
  */
-@Getter
-@ToString
 public class Result {
-    // Result Code: success(1), failure(0)
+    /** 结果码: 成功(1), 失败(0) */
     private int code;
-    // Detail Failure Information
-    private List<Failure> failures;
+
+    /** 错误详情: 如果成功, 则该字段为null; 如果失败, 则该字段不为null */
+    private Failure failure;
 
     public Result(int code) {
         this(code, null);
     }
 
-    public Result(int code, List<Failure> failures) {
+    public Result(int code, Failure failure) {
         this.code = code;
-        this.failures = failures;
+        this.failure = failure;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public Failure getFailure() {
+        return failure;
+    }
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                (code == 1 ? "Success" : ("Failure: " + failure)) +
+                '}';
     }
 }

@@ -1,21 +1,18 @@
 package me.mushen.gungnir.result;
 
-import lombok.Getter;
-import lombok.ToString;
-
+import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Desc
+ * @Desc 带有键值对的Result
  * @Author Mushen
  * @Create 2018-06-30
  */
-@Getter
-@ToString
 public class MapResult<K, V> {
-    // Result
+    /** Result */
     private Result result;
 
+    /** 键值对 */
     private Map<K, V> valueMap;
 
     public MapResult(Result result) {
@@ -29,5 +26,21 @@ public class MapResult<K, V> {
     public MapResult(Result result, Map<K, V> valueMap) {
         this.result = result;
         this.valueMap = valueMap;
+    }
+
+    public Result getResult() {
+        return result;
+    }
+
+    public Map<K, V> getValueMap() {
+        return valueMap == null ? new HashMap<>() : valueMap;
+    }
+
+    @Override
+    public String toString() {
+        return "MapResult{" +
+                "result=" + result +
+                ", valueMap=" + valueMap +
+                '}';
     }
 }

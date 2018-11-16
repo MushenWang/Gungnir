@@ -1,19 +1,15 @@
 package me.mushen.gungnir.result;
 
-import lombok.Getter;
-import lombok.ToString;
-
 /**
- * @Desc
+ * @Desc 带有实体的Result
  * @Author Mushen
  * @Create 2018-06-30
  */
-@Getter
-@ToString
 public class PojoResult<T> {
-    // Result
+    /** Result */
     private Result result;
 
+    /** 实体 */
     private T value;
 
     public PojoResult(Result result) {
@@ -27,5 +23,21 @@ public class PojoResult<T> {
     public PojoResult(Result result, T value) {
         this.result = result;
         this.value = value;
+    }
+
+    public Result getResult() {
+        return result;
+    }
+
+    public T getValue() {
+        return value;
+    }
+
+    @Override
+    public String toString() {
+        return "PojoResult{" +
+                "result=" + result +
+                ", value=" + value +
+                '}';
     }
 }
