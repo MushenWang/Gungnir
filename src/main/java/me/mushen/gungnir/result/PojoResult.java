@@ -17,7 +17,7 @@ public class PojoResult<T> {
     }
 
     public PojoResult(T value) {
-        this(Results.success(), value);
+        this(Result.success(), value);
     }
 
     public PojoResult(Result result, T value) {

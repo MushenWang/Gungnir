@@ -20,7 +20,7 @@ public class MapResult<K, V> {
     }
 
     public MapResult(Map<K, V> valueMap) {
-        this(Results.success(), valueMap);
+        this(Result.success(), valueMap);
     }
 
     public MapResult(Result result, Map<K, V> valueMap) {

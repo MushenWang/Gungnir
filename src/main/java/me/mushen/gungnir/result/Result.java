@@ -1,38 +1,98 @@
 package me.mushen.gungnir.result;
 
+import javax.annotation.Nonnull;
+
 /**
  * @Desc 标识成功与失败的Result
  * @Author Mushen
  * @Create 2018-06-30
  */
-public class Result {
+public final class Result {
+    /** 错误的结果码(0) */
+    private final static int FAIL_CODE = 0;
+    /** 成功的结果码(1) */
+    private final static int SUCC_CODE = 1;
+
     /** 结果码: 成功(1), 失败(0) */
-    private int code;
+    private final int code;
 
     /** 错误详情: 如果成功, 则该字段为null; 如果失败, 则该字段不为null */
-    private Failure failure;
+    private final Failure failure;
 
-    public Result(int code) {
+    /** private constructor */
+    private Result(int code) {
         this(code, null);
     }
 
-    public Result(int code, Failure failure) {
+    /** private constructor */
+    private Result(int code, Failure failure) {
         this.code = code;
         this.failure = failure;
     }
 
+    /**
+     * 创建标识成功的Result
+     * @return
+     */
+    public static Result success() {
+        return new Result(SUCC_CODE);
+    }
+
+    /**
+     * 创建标识失败的Result
+     * @param failure 错误详情
+     * @return
+     */
+    public static Result failure(@Nonnull Failure failure) {
+        return new Result(FAIL_CODE, failure);
+    }
+
+    /**
+     * 创建标识失败的Result
+     * @param throwable 异常栈
+     * @return
+     */
+    public static Result failure(@Nonnull Throwable throwable) {
+        return failure(Failure.failure(throwable));
+    }
+
+    /**
+     * 创建标识失败的Result
+     * @param failDesc 错误详情
+     * @return
+     */
+    public static Result failure(@Nonnull String failDesc) {
+        return failure(Failure.failure(failDesc));
+    }
+
+    /**
+     * 获取是否成功的Result
+     * @return
+     */
+    public boolean isSuccess() {
+        return getCode() == SUCC_CODE;
+    }
+
+    /**
+     * 获取结果码: 成功(1), 失败(0)
+     * @return
+     */
     public int getCode() {
         return code;
     }
 
+    /**
+     * 获取错误详情, 如果成功, 则为空
+     * @return
+     */
     public Failure getFailure() {
         return failure;
     }
 
     @Override
     public String toString() {
-        return "Result{" +
-                (code == 1 ? "Success" : ("Failure: " + failure)) +
-                '}';
+        return  "{" +
+                (getCode() == 1 ? "成功" : "失败: " + getFailure()) +
+                "}";
     }
 }

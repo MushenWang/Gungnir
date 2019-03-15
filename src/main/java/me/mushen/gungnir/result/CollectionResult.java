@@ -21,7 +21,7 @@ public class CollectionResult<T> {
     }
 
     public CollectionResult(Collection<T> values) {
-        this(Results.success(), values);
+        this(Result.success(), values);
     }
 
     public CollectionResult(Result result, Collection<T> values) {
