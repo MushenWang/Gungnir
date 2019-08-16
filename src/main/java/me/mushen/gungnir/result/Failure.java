@@ -9,11 +9,15 @@ import com.google.common.base.Strings;
  */
 public final class Failure {
     /** 默认的错误码 */
-    private static final int DEFAULT_FAIL_CODE = 0;
+    private static final int DEFAULT_FAIL_CODE = 999;
     /** 默认的错误名称 */
-    private static final String DEFAULT_FAIL_NAME = "Internal_Server_Error";
+    private static final String DEFAULT_FAIL_NAME = "Default";
+
     /** 异常错误码 */
-    private static final int THROWABLE_FAIL_CODE = -1;
+    private static final int THROWABLE_FAIL_CODE = 500;
+    /** 异常错误名称 */
+    private static final String THROWABLE_FAIL_NAME = "Internal Server Error";
+
 
     /** 错误码 */
     private final int failCode;
@@ -32,6 +36,25 @@ public final class Failure {
     }
 
     /**
+     * 创建错误详情
+     * @param failCode 错误码
+     * @param failName 错误名称
+     * @param failDesc 错误详情
+     * @return
+     */
+    public static Failure failure(int failCode, String failName, String failDesc) {
+        return new Failure(failCode, failName, failDesc);
+    }
+
+    /**
+     * 创建默认的Failure
+     * @return
+     */
+    public static Failure failure() {
+        return failure("服务器内部错误");
+    }
+
+    /**
      * 使用默认的错误码和错误名称, 创建错误详情
      * @param failDesc 错误详情
      * @return
@@ -46,18 +69,7 @@ public final class Failure {
      * @return
      */
     public static Failure failure(Throwable throwable) {
-        return failure(THROWABLE_FAIL_CODE, throwable.getClass().getSimpleName(), throwable.getMessage());
-    }
-
-    /**
-     * 创建错误详情
-     * @param failCode 错误码
-     * @param failName 错误名称
-     * @param failDesc 错误详情
-     * @return
-     */
-    public static Failure failure(int failCode, String failName, String failDesc) {
-        return new Failure(failCode, failName, failDesc);
+        return failure(THROWABLE_FAIL_CODE, THROWABLE_FAIL_NAME, throwable.getMessage());
     }
 
     /**

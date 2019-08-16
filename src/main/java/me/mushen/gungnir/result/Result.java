@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
  * @Author Mushen
  * @Create 2018-06-30
  */
-public final class Result {
+public final class Result implements Success {
     /** 错误的结果码(0) */
     private final static int FAIL_CODE = 0;
     /** 成功的结果码(1) */
@@ -69,6 +69,7 @@ public final class Result {
      * 获取是否成功的Result
      * @return
      */
+    @Override
     public boolean isSuccess() {
         return getCode() == SUCC_CODE;
     }

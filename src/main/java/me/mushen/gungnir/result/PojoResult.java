@@ -5,30 +5,58 @@ package me.mushen.gungnir.result;
  * @Author Mushen
  * @Create 2018-06-30
  */
-public class PojoResult<T> {
-    /** Result */
-    private Result result;
+public final class PojoResult<T> extends ComplexResult {
+    /** Java POJO */
+    private final T value;
 
-    /** 实体 */
-    private T value;
-
-    public PojoResult(Result result) {
-        this.result = result;
+    private PojoResult(Result result) {
+        this(result, null);
     }
 
-    public PojoResult(T value) {
+    private PojoResult(T value) {
         this(Result.success(), value);
     }
 
-    public PojoResult(Result result, T value) {
-        this.result = result;
+    private PojoResult(Result result, T value) {
+        super(result);
         this.value = value;
     }
 
-    public Result getResult() {
-        return result;
+    /**
+     * 创建成功的PojoResult, 并赋值
+     * @param value
+     * @param <T>
+     * @return
+     */
+    public static <T> PojoResult<T> success(T value) {
+        return new PojoResult<>(value);
     }
 
+    /**
+     * 创建失败的PojoResult
+     * @param result
+     * @param <T>
+     * @return
+     */
+    public static <T> PojoResult<T> failure(Result result) {
+        return new PojoResult<>(result);
+    }
+
+    /**
+     * 创建PojoResult
+     * @param result
+     * @param value
+     * @param <T>
+     * @return
+     */
+    public static <T> PojoResult<T> result(Result result, T value) {
+        return new PojoResult<>(result, value);
+    }
+
+    /**
+     * 获取Java POJO实例
+     * @return
+     */
     public T getValue() {
         return value;
     }
