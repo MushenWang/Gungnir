@@ -17,14 +17,6 @@ public class CollectionResult<T> extends ComplexResult {
     /** 集合数据 */
     private Collection<T> values;
 
-    protected CollectionResult(Result result) {
-        this(result, null);
-    }
-
-    protected CollectionResult(Collection<T> values) {
-        this(Result.success(), values);
-    }
-
     protected CollectionResult(Result result, Collection<T> values) {
         super(result);
         this.values = values;
@@ -47,7 +39,7 @@ public class CollectionResult<T> extends ComplexResult {
      * @return
      */
     public static <T> CollectionResult<T> success(Collection<T> coll) {
-        return new CollectionResult<>(coll);
+        return new CollectionResult<>(Result.success(), coll);
     }
 
     /**
@@ -57,7 +49,7 @@ public class CollectionResult<T> extends ComplexResult {
      * @return
      */
     public static <T> CollectionResult<T> failure(Result result) {
-        return new CollectionResult<>(result);
+        return new CollectionResult<>(result, Collections.emptyList());
     }
 
     /**

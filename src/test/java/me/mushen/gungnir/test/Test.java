@@ -17,8 +17,8 @@ public class Test {
     }
 
     private static void swap(Object[] objects) {
-        Object object = objects[0];
-        objects[0] = objects[1];
-        objects[1] = object;
+        System.out.println(
+                Runtime.getRuntime().availableProcessors()
+        );
     }
 }

@@ -19,12 +19,10 @@ public final class Result implements Success {
     /** 错误详情: 如果成功, 则该字段为null; 如果失败, 则该字段不为null */
     private final Failure failure;
 
-    /** private constructor */
     private Result(int code) {
         this(code, null);
     }
 
-    /** private constructor */
     private Result(int code, Failure failure) {
         this.code = code;
         this.failure = failure;
@@ -53,7 +51,7 @@ public final class Result implements Success {
      * @return
      */
     public static Result failure(@Nonnull Throwable throwable) {
-        return failure(Failure.failure(throwable));
+        return failure(Failure.of(throwable));
     }
 
     /**
@@ -62,7 +60,7 @@ public final class Result implements Success {
      * @return
      */
     public static Result failure(@Nonnull String failDesc) {
-        return failure(Failure.failure(failDesc));
+        return failure(Failure.of(failDesc));
     }
 
     /**
@@ -71,7 +69,7 @@ public final class Result implements Success {
      */
     @Override
     public boolean isSuccess() {
-        return getCode() == SUCC_CODE;
+        return code == SUCC_CODE;
     }
 
     /**
@@ -92,8 +90,8 @@ public final class Result implements Success {
 
     @Override
     public String toString() {
-        return  "{" +
-                (getCode() == 1 ? "成功" : "失败: " + getFailure()) +
-                "}";
+        return "Result{" +
+                (code == SUCC_CODE ? "SUCCESS" : "FAILURE: " + getFailure()) +
+                '}';
     }
 }

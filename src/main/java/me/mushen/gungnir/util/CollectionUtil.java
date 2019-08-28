@@ -43,6 +43,15 @@ public abstract class CollectionUtil {
     }
 
     /**
+     * 判断键值对是否为空
+     * @param map
+     * @return
+     */
+    public static boolean isNotEmpty(Map map) {
+        return !isEmpty(map);
+    }
+
+    /**
      * 返回一个List, 如果给定的集合为null时, 则使用<code>Collections.emptyList()</code>创建一个空List
      * @param coll
      * @param <T>

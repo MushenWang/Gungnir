@@ -1,5 +1,6 @@
 package me.mushen.gungnir.result;
 
+import java.util.Collections;
 import java.util.Map;
 
 import static me.mushen.gungnir.util.CollectionUtil.nullToEmptyMap;
@@ -12,14 +13,6 @@ import static me.mushen.gungnir.util.CollectionUtil.nullToEmptyMap;
 public final class MapResult<K, V> extends ComplexResult {
     /** 键值对 */
     private Map<K, V> valueMap;
-
-    private MapResult(Result result) {
-        this(result, null);
-    }
-
-    private MapResult(Map<K, V> valueMap) {
-        this(Result.success(), valueMap);
-    }
 
     private MapResult(Result result, Map<K, V> valueMap) {
         super(result);
@@ -34,7 +27,7 @@ public final class MapResult<K, V> extends ComplexResult {
      * @return
      */
     public static <K, V> MapResult<K, V> success(Map<K, V> map) {
-        return new MapResult<>(map);
+        return new MapResult<>(Result.success(), map);
     }
 
     /**
@@ -45,7 +38,7 @@ public final class MapResult<K, V> extends ComplexResult {
      * @return
      */
     public static <K, V> MapResult<K, V> failure(Result result) {
-        return new MapResult<>(result);
+        return new MapResult<>(result, Collections.emptyMap());
     }
 
     /**

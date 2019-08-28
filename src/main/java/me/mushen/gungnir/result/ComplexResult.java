@@ -28,6 +28,8 @@ public abstract class ComplexResult implements Success {
 
     @Override
     public String toString() {
-        return result == null ? "{result=null}" : result.toString();
+        return "ComplexResult{" +
+                "result=" + result +
+                '}';
     }
 }

@@ -1,9 +1,7 @@
 package me.mushen.gungnir.result;
 
-import com.google.common.base.Strings;
-
 /**
- * @Desc 错误详情, 包括: 错误码, 错误名称, 错误详情
+ * @Desc 错误详情, 包括: 错误码, 错误名称, 错误详情, 异常或者错误堆栈信息
  * @Author Mushen
  * @Create 2018-06-30
  */
@@ -12,12 +10,10 @@ public final class Failure {
     private static final int DEFAULT_FAIL_CODE = 999;
     /** 默认的错误名称 */
     private static final String DEFAULT_FAIL_NAME = "Default";
-
     /** 异常错误码 */
     private static final int THROWABLE_FAIL_CODE = 500;
     /** 异常错误名称 */
     private static final String THROWABLE_FAIL_NAME = "Internal Server Error";
-
 
     /** 错误码 */
     private final int failCode;
@@ -28,11 +24,18 @@ public final class Failure {
     /** 错误详情 */
     private final String failDesc;
 
-    /** private constructor */
+    /** 错误或者异常信息 */
+    private final Throwable throwable;
+
     private Failure(int failCode, String failName, String failDesc) {
+        this(failCode, failName, failDesc, null);
+    }
+
+    private Failure(int failCode, String failName, String failDesc, Throwable throwable) {
         this.failCode = failCode;
         this.failName = failName;
         this.failDesc = failDesc;
+        this.throwable = throwable;
     }
 
     /**
@@ -42,7 +45,7 @@ public final class Failure {
      * @param failDesc 错误详情
      * @return
      */
-    public static Failure failure(int failCode, String failName, String failDesc) {
+    public static Failure of(int failCode, String failName, String failDesc) {
         return new Failure(failCode, failName, failDesc);
     }
 
@@ -50,8 +53,8 @@ public final class Failure {
      * 创建默认的Failure
      * @return
      */
-    public static Failure failure() {
-        return failure("服务器内部错误");
+    public static Failure of() {
+        return of("服务器内部错误");
     }
 
     /**
@@ -59,8 +62,8 @@ public final class Failure {
      * @param failDesc 错误详情
      * @return
      */
-    public static Failure failure(String failDesc) {
-        return failure(DEFAULT_FAIL_CODE, DEFAULT_FAIL_NAME, failDesc);
+    public static Failure of(String failDesc) {
+        return of(DEFAULT_FAIL_CODE, DEFAULT_FAIL_NAME, failDesc);
     }
 
     /**
@@ -68,8 +71,8 @@ public final class Failure {
      * @param throwable 异常栈
      * @return
      */
-    public static Failure failure(Throwable throwable) {
-        return failure(THROWABLE_FAIL_CODE, THROWABLE_FAIL_NAME, throwable.getMessage());
+    public static Failure of(Throwable throwable) {
+        return new Failure(THROWABLE_FAIL_CODE, THROWABLE_FAIL_NAME, throwable.getMessage(), throwable);
     }
 
     /**
@@ -85,7 +88,7 @@ public final class Failure {
      * @return
      */
     public String getFailName() {
-        return Strings.nullToEmpty(failName).trim();
+        return failName;
     }
 
     /**
@@ -93,15 +96,24 @@ public final class Failure {
      * @return
      */
     public String getFailDesc() {
-        return Strings.nullToEmpty(failDesc).trim();
+        return failDesc;
+    }
+
+    /**
+     * 获取错误或者异常信息
+     * @return
+     */
+    public Throwable getThrowable() {
+        return throwable;
     }
 
     @Override
     public String toString() {
-        return  "{" +
-                "错误码: " + getFailCode() + ", " +
-                "错误名称: " + getFailName() + ", " +
-                "错误详情: " + getFailDesc() +
-                "}";
+        return "Failure{" +
+                "failCode=" + failCode +
+                ", failName='" + failName + '\'' +
+                ", failDesc='" + failDesc + '\'' +
+                ", throwable=" + throwable +
+                '}';
     }
 }

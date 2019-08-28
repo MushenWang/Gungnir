@@ -9,14 +9,6 @@ public final class PojoResult<T> extends ComplexResult {
     /** Java POJO */
     private final T value;
 
-    private PojoResult(Result result) {
-        this(result, null);
-    }
-
-    private PojoResult(T value) {
-        this(Result.success(), value);
-    }
-
     private PojoResult(Result result, T value) {
         super(result);
         this.value = value;
@@ -29,7 +21,7 @@ public final class PojoResult<T> extends ComplexResult {
      * @return
      */
     public static <T> PojoResult<T> success(T value) {
-        return new PojoResult<>(value);
+        return new PojoResult<>(Result.success(), value);
     }
 
     /**
@@ -39,7 +31,7 @@ public final class PojoResult<T> extends ComplexResult {
      * @return
      */
     public static <T> PojoResult<T> failure(Result result) {
-        return new PojoResult<>(result);
+        return new PojoResult<>(result, null);
     }
 
     /**
