@@ -21,7 +21,7 @@ public final class PojoResult<T> extends ComplexResult {
      * @return
      */
     public static <T> PojoResult<T> success(T value) {
-        return new PojoResult<>(Result.success(), value);
+        return of(Result.success(), value);
     }
 
     /**
@@ -31,7 +31,7 @@ public final class PojoResult<T> extends ComplexResult {
      * @return
      */
     public static <T> PojoResult<T> failure(Result result) {
-        return new PojoResult<>(result, null);
+        return of(result, null);
     }
 
     /**
@@ -41,7 +41,7 @@ public final class PojoResult<T> extends ComplexResult {
      * @param <T>
      * @return
      */
-    public static <T> PojoResult<T> result(Result result, T value) {
+    public static <T> PojoResult<T> of(Result result, T value) {
         return new PojoResult<>(result, value);
     }
 
@@ -55,7 +55,7 @@ public final class PojoResult<T> extends ComplexResult {
 
     @Override
     public String toString() {
-        return "PojoResult{" +
+        return  '{' +
                 "result=" + result +
                 ", value=" + value +
                 '}';

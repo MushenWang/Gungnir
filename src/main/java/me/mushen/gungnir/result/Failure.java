@@ -6,24 +6,17 @@ package me.mushen.gungnir.result;
  * @Create 2018-06-30
  */
 public final class Failure {
-    /** 默认的错误码 */
-    private static final int DEFAULT_FAIL_CODE = 999;
-    /** 默认的错误名称 */
-    private static final String DEFAULT_FAIL_NAME = "Default";
     /** 异常错误码 */
-    private static final int THROWABLE_FAIL_CODE = 500;
+    private static final int THROWABLE_FAIL_CODE = 900500;
     /** 异常错误名称 */
-    private static final String THROWABLE_FAIL_NAME = "Internal Server Error";
+    private static final String THROWABLE_FAIL_NAME = "Server.Error.Internal";
 
     /** 错误码 */
     private final int failCode;
-
     /** 错误名称 */
     private final String failName;
-
     /** 错误详情 */
     private final String failDesc;
-
     /** 错误或者异常信息 */
     private final Throwable throwable;
 
@@ -47,23 +40,6 @@ public final class Failure {
      */
     public static Failure of(int failCode, String failName, String failDesc) {
         return new Failure(failCode, failName, failDesc);
-    }
-
-    /**
-     * 创建默认的Failure
-     * @return
-     */
-    public static Failure of() {
-        return of("服务器内部错误");
-    }
-
-    /**
-     * 使用默认的错误码和错误名称, 创建错误详情
-     * @param failDesc 错误详情
-     * @return
-     */
-    public static Failure of(String failDesc) {
-        return of(DEFAULT_FAIL_CODE, DEFAULT_FAIL_NAME, failDesc);
     }
 
     /**
@@ -109,7 +85,7 @@ public final class Failure {
 
     @Override
     public String toString() {
-        return "Failure{" +
+        return  '{' +
                 "failCode=" + failCode +
                 ", failName='" + failName + '\'' +
                 ", failDesc='" + failDesc + '\'' +

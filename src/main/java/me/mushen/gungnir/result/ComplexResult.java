@@ -28,7 +28,7 @@ public abstract class ComplexResult implements Success {
 
     @Override
     public String toString() {
-        return "ComplexResult{" +
+        return  '{' +
                 "result=" + result +
                 '}';
     }

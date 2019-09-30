@@ -8,20 +8,15 @@ import javax.annotation.Nonnull;
  * @Create 2018-06-30
  */
 public final class Result implements Success {
-    /** 错误的结果码(0) */
-    private final static int FAIL_CODE = 0;
     /** 成功的结果码(1) */
     private final static int SUCC_CODE = 1;
+    /** 错误的结果码(0) */
+    private final static int FAIL_CODE = 0;
 
     /** 结果码: 成功(1), 失败(0) */
     private final int code;
-
     /** 错误详情: 如果成功, 则该字段为null; 如果失败, 则该字段不为null */
     private final Failure failure;
-
-    private Result(int code) {
-        this(code, null);
-    }
 
     private Result(int code, Failure failure) {
         this.code = code;
@@ -33,7 +28,7 @@ public final class Result implements Success {
      * @return
      */
     public static Result success() {
-        return new Result(SUCC_CODE);
+        return new Result(SUCC_CODE, null);
     }
 
     /**
@@ -52,15 +47,6 @@ public final class Result implements Success {
      */
     public static Result failure(@Nonnull Throwable throwable) {
         return failure(Failure.of(throwable));
-    }
-
-    /**
-     * 创建标识失败的Result
-     * @param failDesc 错误详情
-     * @return
-     */
-    public static Result failure(@Nonnull String failDesc) {
-        return failure(Failure.of(failDesc));
     }
 
     /**
@@ -90,8 +76,6 @@ public final class Result implements Success {
 
     @Override
     public String toString() {
-        return "Result{" +
-                (code == SUCC_CODE ? "SUCCESS" : "FAILURE: " + getFailure()) +
-                '}';
+        return isSuccess() ? "Success" : "Failure: " + failure;
     }
 }

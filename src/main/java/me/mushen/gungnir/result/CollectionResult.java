@@ -1,12 +1,13 @@
 package me.mushen.gungnir.result;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static me.mushen.gungnir.util.CollectionUtil.nullToEmptyList;
-import static me.mushen.gungnir.util.CollectionUtil.nullToEmptySet;
+import javax.annotation.Nonnull;
 
 /**
  * @Desc 带有集合的Result
@@ -15,7 +16,7 @@ import static me.mushen.gungnir.util.CollectionUtil.nullToEmptySet;
  */
 public class CollectionResult<T> extends ComplexResult {
     /** 集合数据 */
-    private Collection<T> values;
+    protected Collection<T> values;
 
     protected CollectionResult(Result result, Collection<T> values) {
         super(result);
@@ -28,7 +29,7 @@ public class CollectionResult<T> extends ComplexResult {
      * @param <T>
      * @return
      */
-    public static <T> CollectionResult<T> success(T value) {
+    public static <T> CollectionResult<T> success(@Nonnull T value) {
         return success(Collections.singletonList(value));
     }
 
@@ -39,7 +40,7 @@ public class CollectionResult<T> extends ComplexResult {
      * @return
      */
     public static <T> CollectionResult<T> success(Collection<T> coll) {
-        return new CollectionResult<>(Result.success(), coll);
+        return of(Result.success(), coll);
     }
 
     /**
@@ -49,7 +50,7 @@ public class CollectionResult<T> extends ComplexResult {
      * @return
      */
     public static <T> CollectionResult<T> failure(Result result) {
-        return new CollectionResult<>(result, Collections.emptyList());
+        return of(result, null);
     }
 
     /**
@@ -59,8 +60,8 @@ public class CollectionResult<T> extends ComplexResult {
      * @param <T>
      * @return
      */
-    public static <T> CollectionResult<T> result(Result result, T value) {
-        return result(result, Collections.singletonList(value));
+    public static <T> CollectionResult<T> of(Result result, @Nonnull T value) {
+        return of(result, Collections.singletonList(value));
     }
 
     /**
@@ -70,7 +71,7 @@ public class CollectionResult<T> extends ComplexResult {
      * @param <T>
      * @return
      */
-    public static <T> CollectionResult<T> result(Result result, Collection<T> coll) {
+    public static <T> CollectionResult<T> of(Result result, Collection<T> coll) {
         return new CollectionResult<>(result, coll);
     }
 
@@ -87,7 +88,7 @@ public class CollectionResult<T> extends ComplexResult {
      * @return
      */
     public List<T> getValueAsList() {
-        return nullToEmptyList(values);
+        return values == null ? Collections.emptyList() : new ArrayList<>(values);
     }
 
     /**
@@ -95,14 +96,30 @@ public class CollectionResult<T> extends ComplexResult {
      * @return
      */
     public Set<T> getValueAsSet() {
-        return nullToEmptySet(values);
+        return values == null ? Collections.emptySet() : new HashSet<>(values);
+    }
+
+    /**
+     * 容量
+     * @return
+     */
+    public int size() {
+        return values == null ? 0 : values.size();
+    }
+
+    /**
+     * 是否不包含任何元素
+     * @return
+     */
+    public boolean isEmpty() {
+        return size() == 0;
     }
 
     @Override
     public String toString() {
-        return "CollectionResult{" +
+        return  '{' +
                 "result=" + result +
-                ", values=" + values +
+                ", collection=" + values +
                 '}';
     }
 }

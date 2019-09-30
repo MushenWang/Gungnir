@@ -3,8 +3,6 @@ package me.mushen.gungnir.result;
 import java.util.Collections;
 import java.util.Map;
 
-import static me.mushen.gungnir.util.CollectionUtil.nullToEmptyMap;
-
 /**
  * @Desc 带有键值对的Result
  * @Author Mushen
@@ -27,7 +25,7 @@ public final class MapResult<K, V> extends ComplexResult {
      * @return
      */
     public static <K, V> MapResult<K, V> success(Map<K, V> map) {
-        return new MapResult<>(Result.success(), map);
+        return of(Result.success(), map);
     }
 
     /**
@@ -38,19 +36,19 @@ public final class MapResult<K, V> extends ComplexResult {
      * @return
      */
     public static <K, V> MapResult<K, V> failure(Result result) {
-        return new MapResult<>(result, Collections.emptyMap());
+        return of(result, null);
     }
 
     /**
      * 创建CollectionResult
      * @param result
-     * @param map
+     * @param valueMap
      * @param <K>
      * @param <V>
      * @return
      */
-    public static <K, V> MapResult<K, V> result(Result result, Map<K, V> map) {
-        return new MapResult<>(result, map);
+    public static <K, V> MapResult<K, V> of(Result result, Map<K, V> valueMap) {
+        return new MapResult<>(result, valueMap);
     }
 
     /**
@@ -58,14 +56,30 @@ public final class MapResult<K, V> extends ComplexResult {
      * @return
      */
     public Map<K, V> getValueMap() {
-        return nullToEmptyMap(valueMap);
+        return valueMap == null ? Collections.emptyMap() : valueMap;
+    }
+
+    /**
+     * 容量
+     * @return
+     */
+    public int size() {
+        return valueMap == null ? 0 : valueMap.size();
+    }
+
+    /**
+     * 是否为空
+     * @return
+     */
+    public boolean isEmpty() {
+        return size() == 0;
     }
 
     @Override
     public String toString() {
-        return "MapResult{" +
+        return  '{' +
                 "result=" + result +
-                ", valueMap=" + valueMap +
+                ", map=" + valueMap +
                 '}';
     }
 }
