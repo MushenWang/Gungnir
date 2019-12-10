@@ -20,7 +20,7 @@ public abstract class CollectionUtil {
      * @param coll
      * @return
      */
-    public static boolean isEmpty(Collection coll) {
+    public static boolean isEmpty(Collection<?> coll) {
         return coll == null || coll.isEmpty();
     }
 
@@ -29,7 +29,7 @@ public abstract class CollectionUtil {
      * @param coll
      * @return
      */
-    public static boolean isNotEmpty(Collection coll) {
+    public static boolean isNotEmpty(Collection<?> coll) {
         return !isEmpty(coll);
     }
 
@@ -38,7 +38,7 @@ public abstract class CollectionUtil {
      * @param map
      * @return
      */
-    public static boolean isEmpty(Map map) {
+    public static boolean isEmpty(Map<?, ?> map) {
         return map == null || map.isEmpty();
     }
 
@@ -47,7 +47,7 @@ public abstract class CollectionUtil {
      * @param map
      * @return
      */
-    public static boolean isNotEmpty(Map map) {
+    public static boolean isNotEmpty(Map<?, ?> map) {
         return !isEmpty(map);
     }
 
