@@ -14,7 +14,7 @@
         <systemrules.version>1.16.0</systemrules.version>
         <log4j.version>2.6.2</log4j.version>
         <lombok.version>1.16.18</lombok.version>
-        <guava.version>23.2-jre</guava.version>
+        <guava.version>24.1.1-jre</guava.version>
         <google.jsr305.version>3.0.2</google.jsr305.version>
         <!-- plugin -->
         <compiler.plugin.version>3.5.1</compiler.plugin.version>
